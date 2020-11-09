@@ -1,0 +1,10 @@
+.app {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.tooltip-text {
+  font-size: 2rem;
+  background-color: cyan;
+  cursor: default;
+}

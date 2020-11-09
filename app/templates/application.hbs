@@ -1,5 +1,19 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
+<main class="app">
 
-{{outlet}}
+  <p>BEFORE LOOP: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore minima iste consequuntur odit quisquam illum, aperiam tenetur numquam obcaecati atque eius excepturi, non perferendis libero commodi placeat? Porro, veritatis consectetur!</p>
+
+  {{#each this.rows as |row|}}
+    <BsTooltip @triggerElement="#{{row.id}}">
+      {{row.tooltipText}}
+    </BsTooltip>
+  {{/each}}
+
+  {{#each this.rows as |row|}}
+    <MyComponent
+      @id={{row.id}}
+    />
+  {{/each}}
+
+  <p>AFTER LOOP: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic omnis vel velit! Quasi aliquam cum earum voluptate incidunt velit blanditiis, possimus ipsam accusantium corrupti omnis minima at hic nobis ex.</p>
+
+</main>
