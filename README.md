@@ -1,7 +1,14 @@
 # ember-bootstrap-undefined-trigger-element
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+The issue here for ember-bootstrap 4.4.0 is basically a DOM node order/timing issue. This occurs if your use case needs to render the contextual help (Ex: BsTooltip) earlier in DOM order than the trigger element. Some users may not have the ability to control their DOM order in all circumstances, and this would be a breaking change for them in this circumstance upgrading from 4.3.0 to 4.4.0
+
+previously in 4.3.0, we kicked off `getTriggerTargetElement` in `didInsertElement` https://github.com/kaliber5/ember-bootstrap/blob/v4.3.0/addon/components/bs-contextual-help.js#L726, this allowed the full page to render before firing.
+
+Now with 4.4.0, we kick off `getTriggerTargetElement` in the `did-insert` modifier named `setup` https://github.com/kaliber5/ember-bootstrap/blob/v4.4.0/addon/components/bs-contextual-help.js#L693, this fires inline at the exact time the modifier is evaluated so anything waiting to be rendered in DOM later in the page will not be rendered yet and will throw
+
+```
+Uncaught (in promise) Error: Assertion Failed: Could not find trigger element for tooltip/popover component
+```
 
 ## Prerequisites
 
